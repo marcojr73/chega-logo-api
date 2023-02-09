@@ -1,13 +1,22 @@
 import joi from "joi"
 
-const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i
-const passwordRegex = /[a-zA-Z0-9]{8}/i 
+const nameRegex = /^[a-záàâãéèêíïóôõöúçñ ]+$/i
+const licensePlateRegex = /[A-Z]{3}[0-9][0-9A-Z][0-9]{2}/i
 
 const userSchema = joi.object({
-    email: joi.string().email().pattern(emailRegex).required(),
-    password: joi.string().min(8).pattern(passwordRegex).required(),
+    userName: joi.string().min(4).pattern(nameRegex).required(),
+    password: joi.string().min(8).required(),
+})
+
+const truckSchema = joi.object({
+    name: joi.string().min(0).required(),
+    licensePlate: joi.string().min(0).pattern(licensePlateRegex).required(),
+    year: joi.string().min(0).required(),
+    color: joi.string().min(0).required(),
+    efficiency: joi.string().min(0).required(),
 })
 
 export default {
-    userSchema
+    userSchema,
+    truckSchema
 } 

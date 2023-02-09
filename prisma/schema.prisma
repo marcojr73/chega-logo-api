@@ -15,15 +15,16 @@ model users {
   userName                           String                  @unique
   password                           String
   createdAt                          DateTime                @default(now())
+  revenues                           revenues[]
 }
 
 model trucks {
   id                                 Int                     @id @default(autoincrement())
-  name                               String                  @unique
+  name                               String                  
   licensePlate                       String                  @unique
-  year                               Int              
+  year                               String              
   color                              String             
-  efficiency                         Int              
+  efficiency                         String              
   createdAt                          DateTime                @default(now())
 }
 
@@ -37,5 +38,7 @@ model places {
 model revenues {
   id                                 Int                     @id @default(autoincrement())
   profit                             String
+  userId                             Int
+  user                               users                   @relation(fields: [userId], references: [id])
   createdAt                          DateTime                @default(now())
 }

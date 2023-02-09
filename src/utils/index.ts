@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import { NextFunction, Request, Response } from "express"
 
-import errors from "./errors"
+import errors from "./errors/index.js"
 
 async function validateTokenAndGetAccount(req: Request, res: Response, next: NextFunction) {
     const token: string = req.headers.authorization?.replace("Bearer", "").trim()

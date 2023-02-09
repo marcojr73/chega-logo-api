@@ -1,14 +1,14 @@
 interface userEntity {
-    email: string,
+    userName: string,
     password: string,
 }
 
 interface truckEntity {
     name: string,                               
     licensePlate: string,                       
-    year: number,                                             
+    year: string,                                             
     color: string,                                           
-    efficiency: number  
+    efficiency: string  
 }
 
 export {
