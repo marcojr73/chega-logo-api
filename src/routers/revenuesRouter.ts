@@ -6,5 +6,6 @@ import utils from "../utils/index.js"
 const revenuesRouter= Router()
 
 revenuesRouter.post("/revenues", revenuesMiddleware.validateRevenuesdata, utils.validateTokenAndGetAccount, revenuesController.newRevenue)
+revenuesRouter.get("/revenues", utils.validateTokenAndGetAccount, revenuesController.listRevenues)
 
 export default revenuesRouter

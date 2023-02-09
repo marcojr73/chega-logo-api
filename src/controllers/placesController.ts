@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import placesService from "../services/placesService.js"
 
 async function newPlace(req: Request, res: Response){
-    res.status(201).send("places")
+    res.status(201).send("Created")
 }
 
 async function listPlaces(req: Request, res: Response){

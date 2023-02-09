@@ -37,7 +37,7 @@ model places {
 
 model revenues {
   id                                 Int                     @id @default(autoincrement())
-  profit                             String
+  profit                             Int
   userId                             Int
   user                               users                   @relation(fields: [userId], references: [id])
   createdAt                          DateTime                @default(now())
