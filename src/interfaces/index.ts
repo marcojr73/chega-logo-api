@@ -1,5 +1,5 @@
 interface userEntity {
-    email: string,
+    userName: string,
     password: string,
 }
 
