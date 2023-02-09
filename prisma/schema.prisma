@@ -20,11 +20,11 @@ model users {
 
 model trucks {
   id                                 Int                     @id @default(autoincrement())
-  name                               String                  @unique
+  name                               String                  
   licensePlate                       String                  @unique
-  year                               Int              
+  year                               String              
   color                              String             
-  efficiency                         Int              
+  efficiency                         String              
   createdAt                          DateTime                @default(now())
 }
 

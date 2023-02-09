@@ -6,9 +6,9 @@ interface userEntity {
 interface truckEntity {
     name: string,                               
     licensePlate: string,                       
-    year: number,                                             
+    year: string,                                             
     color: string,                                           
-    efficiency: number  
+    efficiency: string  
 }
 
 export {
