@@ -28,9 +28,9 @@ function verifyPasswordIsCorrect(password: string, passCrypt: string){
     if(!ans) errors.unprocessableEntity("Your password is incorrect")
 }
 
-function generateToken(businessId: number){
+function generateToken(userId: number){
     const {KEYJWT} = process.env
-    return Jwt.sign({ businessId }, KEYJWT, { expiresIn: "1d"})
+    return Jwt.sign({ userId }, KEYJWT, { expiresIn: "1d"})
 }
 
 export default {

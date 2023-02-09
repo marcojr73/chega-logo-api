@@ -11,7 +11,13 @@ interface truckEntity {
     efficiency: string  
 }
 
+type lastMonthYearEntity = {
+    month: string;
+    year: string;
+}[]
+
 export {
     userEntity,
-    truckEntity
+    truckEntity,
+    lastMonthYearEntity
 }
