@@ -16,8 +16,15 @@ type lastMonthYearEntity = {
     year: string;
 }[]
 
+interface placesEntity {
+    id: number,
+    name: string,
+    distance: string
+}
+
 export {
     userEntity,
     truckEntity,
-    lastMonthYearEntity
+    lastMonthYearEntity,
+    placesEntity
 }
