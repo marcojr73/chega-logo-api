@@ -5,7 +5,9 @@ import utils from "../utils/index.js"
 
 const trucksRouter= Router()
 
-trucksRouter.post("/truck", trucksMiddleware.validateTruckdata, utils.validateTokenAndGetAccount, trucksController.newTruck)
+trucksRouter.post("/truckes", trucksMiddleware.validateTruckdata, utils.validateTokenAndGetAccount, trucksController.newTruck)
 trucksRouter.get("/truckes", utils.validateTokenAndGetAccount, trucksController.listTrucks)
+trucksRouter.put("/truckes", trucksMiddleware.validateTruckdata, utils.validateTokenAndGetAccount, trucksController.updateTruck)
+trucksRouter.delete("/truckes/:licensePlate", utils.validateTokenAndGetAccount, trucksController.deleteTrucks)
 
 export default trucksRouter
