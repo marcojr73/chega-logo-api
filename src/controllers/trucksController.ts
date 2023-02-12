@@ -16,7 +16,23 @@ async function listTrucks(req: Request, res: Response){
     res.status(200).send(trucks)
 }
 
+async function updateTruck(req: Request, res: Response){
+    const data: truckEntity = req.body
+    await trucksService.truckAlreadyExist(data.licensePlate)
+    await trucksService.updateTruck(data)
+    res.status(200).send("Updated")
+}
+
+async function deleteTrucks(req: Request, res: Response){
+    const {licensePlate} = req.params
+    await trucksService.truckAlreadyExist(licensePlate)
+    await trucksService.deleteTruck(licensePlate)
+    res.status(204).send("Deleted")
+}
+
 export default {
     newTruck,
-    listTrucks
+    listTrucks,
+    updateTruck,
+    deleteTrucks
 }

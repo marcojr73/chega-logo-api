@@ -9,7 +9,7 @@ const userSchema = joi.object({
 })
 
 const truckSchema = joi.object({
-    name: joi.string().min(0).required(),
+    name: joi.string().min(3).required(),
     licensePlate: joi.string().min(0).pattern(licensePlateRegex).required(),
     year: joi.string().min(0).required(),
     color: joi.string().min(0).required(),
