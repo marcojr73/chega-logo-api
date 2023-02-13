@@ -2,8 +2,8 @@ import revenuesRepository from "../repositories/revenuesRepository.js"
 import dayjs from "dayjs"
 import { lastMonthYearEntity } from "../interfaces/index.js"
 
-async function insertRevenue(profit: number, userId: number){
-    await revenuesRepository.createRevenue(profit, userId)
+async function insertRevenue(value: number, userId: number){
+    await revenuesRepository.createRevenue(value, userId)
 }
 
 function getLastTwelveMonthYear() {
@@ -48,23 +48,26 @@ async function mappingBalanceLastMonth(lastMonthsYears: lastMonthYearEntity) {
         12: "Dez",
     }
 
-    let sumBilling = 0
+    let sumValues = 0
+    let sumTravels = 0
 
     for (const monthYear of lastMonthsYears) {
         const sum = await revenuesRepository.getBalanceByMonthYear(+monthYear.month, +monthYear.year)
-        balance.push({
-            date: `${hash[+monthYear.month]}/${monthYear.year}`,
-            balance: Number(sum[0].sum),
-        })
-        sumBilling += Number(sum[0].sum)
+        balance.push([
+            `${hash[+monthYear.month]}/${monthYear.year}`,
+            Number(sum[0].sum),
+        ])
+        sumTravels += Number(sum[0].count)
+        sumValues += Number(sum[0].sum)
     }
 
     const stats = {
-        sumBilling,
-        mediaBilling: (sumBilling/12).toFixed(2)
+        sumValues,
+        sumTravels,
+        mediaValues: Number((sumValues/12).toFixed(2))
     }
 
-    return {balance, stats}
+    return {balance: balance.reverse(), stats}
 }
 
 export default {

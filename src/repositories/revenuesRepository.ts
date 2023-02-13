@@ -1,14 +1,14 @@
 import { prisma } from "../config/dataBase.js"
 
-async function createRevenue(profit: number, userId: number){
+async function createRevenue(value: number, userId: number){
     await prisma.revenues.create({
-        data: {profit, userId}
+        data: {value, userId}
     })
 }
 
 async function getBalanceByMonthYear(month: number, year: number){
     return await prisma.$queryRaw`
-        SELECT SUM(profit) FROM revenues WHERE EXTRACT(MONTH FROM "createdAt") = ${month}
+        SELECT SUM(value), count(*) FROM revenues WHERE EXTRACT(MONTH FROM "createdAt") = ${month}
         AND EXTRACT(YEAR FROM "createdAt") = ${year}
     `
 }

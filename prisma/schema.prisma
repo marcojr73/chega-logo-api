@@ -31,13 +31,13 @@ model trucks {
 model places {
   id                                 Int                     @id @default(autoincrement())
   name                               String
-  distance                           Int
+  distance                           String
   createdAt                          DateTime                @default(now())
 }
 
 model revenues {
   id                                 Int                     @id @default(autoincrement())
-  profit                             Int
+  value                              Int
   userId                             Int
   user                               users                   @relation(fields: [userId], references: [id])
   createdAt                          DateTime                @default(now())
