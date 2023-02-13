@@ -1,15 +1,15 @@
 import supertest from "supertest"
-import { prisma } from "../../src/config/dataBase.js"
 import app from "../../src/app.js"
-import * as factory from "../factories/userFactory.js"
+import * as factory from "../factories/index.js"
 import dotenv from "dotenv"
+import utils from "../../src/utils/index.js"
 
 dotenv.config()
 
 console.log("tests running on base" + process.env.DATABASE_URL)
 
 beforeEach(async () => {
-    await prisma.users.deleteMany({ where: {} })
+    await utils.DELETE_DB()
 })
 
 describe("sign-up", () => {

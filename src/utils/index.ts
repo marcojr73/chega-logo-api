@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 import { NextFunction, Request, Response } from "express"
 
 import errors from "./errors/index.js"
+import { prisma } from "../config/dataBase.js"
 
 async function validateTokenAndGetAccount(req: Request, res: Response, next: NextFunction) {
     const token: string = req.headers.authorization?.replace("Bearer", "").trim()
@@ -16,6 +17,14 @@ async function validateTokenAndGetAccount(req: Request, res: Response, next: Nex
     next()
 }
 
+async function DELETE_DB(){
+    await prisma.trucks.deleteMany({where: {}})
+    await prisma.revenues.deleteMany({where: {}})
+    await prisma.places.deleteMany({ where: {} })
+    await prisma.users.deleteMany({where: {}})
+}
+
 export default {
-    validateTokenAndGetAccount
+    validateTokenAndGetAccount,
+    DELETE_DB
 }
