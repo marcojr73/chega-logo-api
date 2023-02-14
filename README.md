@@ -13,6 +13,7 @@
 ## Description
 - Seu João é dono da empresa Chega Logo, uma pequena transportadora. onde fica o galpão dessa empresa, caminhões saem carregando suas entregas para outras localidades, onde deixam o carregamento e retornam. Faz isso com um preço muito competitivo e com excelente pontualidade. O segredo dessa eficiência, segundo Seu João, é o controle que faz das viagens, caminhões e localidades através de uma planilha, cada um em uma respectiva aba. Lá, ele registra tudo o que precisa para calcular o preço das entregas de forma que seja justo mas, também, lucrativo. Contudo, seu João vem enfrentando dificuldades em lidar com a quantidade de dados em sua planilha, que cresce cada vez mais. 
 - Esta API é responsavel por organizar todo o esquema de transportes, através de um login de usuário e senha seu João pode gerenciar tudo de forma dinâmica e segura.
+- Para fins de demonstração os dados de faturamento anual já foram previamente inseridos no banco de dados.
 
 - [veja meu repositório front end desta aplicação aqui](https://github.com/marcojr73/chega-logo-front)
 
