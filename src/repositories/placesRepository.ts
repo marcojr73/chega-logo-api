@@ -1,7 +1,7 @@
 import { prisma } from "../config/dataBase.js"
 import { placesEntity } from "../interfaces/index.js"
 
-async function findAllPlaces(page, limit) {
+async function findAllPlaces(page: number, limit: number) {
     return await prisma.places.findMany({
         take: limit,
         skip: (page - 1) * limit

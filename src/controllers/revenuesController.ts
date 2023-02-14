@@ -2,9 +2,9 @@ import { Request, Response } from "express"
 import revenuesServices from "../services/revenuesServices.js"
 
 async function newRevenue(req: Request, res: Response){
-    const profit = +req.body.profit
+    const value = +req.body.value
     const userId: number = res.locals.userId
-    await revenuesServices.insertRevenue(profit, userId)
+    await revenuesServices.insertRevenue(value, userId)
     res.status(201).send("Created")
 }
 

@@ -1,0 +1,480 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Chega-logo-API",
+        "description": "Seu João é dono da empresa Chega Logo, uma pequena transportadora, onde fica o galpão dessa empresa. Do galpão, caminhões saem carregando suas entregas para outras localidades, onde deixam o carregamento e retornam. Faz isso com um preço muito competitivo e com excelente pontualidade. O segredo dessa eficiência, segundo Seu João, é o controle que faz das viagens, caminhões e localidades através de uma planilha, cada um em uma respectiva aba. Lá, ele registra tudo o que precisa para calcular o preço das entregas de forma que seja justo mas, também, lucrativo. Contudo, seu João vem enfrentando dificuldades em lidar com a quantidade de dados em sua planilha, que cresce cada vez mais. Esta API é responsavel por organizar todo o esquema de transportes, agora seu João pode gerenciar tudo de forma dinâmica e segura.",
+        "contact": {
+            "email": "marco.junior@engenharia.ufjf.br"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:5000"
+        }
+    ],
+    "paths": {
+        "/sign-up": {
+            "post": {
+                "summary": "Cadastro de usuário",
+                "description": "Esta rota é responsável por validar se os dados estão no formato correto e se não há conflito com o banco de dados no registro de usuário",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sign-up"
+                            },
+                            "examples": {
+                                "corpo correto": {
+                                    "value": {
+                                        "userName": "Seu João",
+                                        "password": "joao1234"
+                                    }
+                                },
+                                "corpo incorreto": {
+                                    "value": {
+                                        "userName": "Seu João",
+                                        "password": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "422": {
+                        "description": "you sent the data incorrectly"
+                    },
+                    "409": {
+                        "description": "userName already register"
+                    }
+                }
+            }
+        },
+        "/sign-in": {
+            "post": {
+                "summary": "Login de usuário",
+                "description": "Esta rota é responsável por validar se os dados estão no formato correto e se as credenciais do usuário foram enviadas corretamente",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/sign-in"
+                            },
+                            "examples": {
+                                "corpo correto": {
+                                    "value": {
+                                        "userName": "Seu João",
+                                        "password": "joao1234"
+                                    }
+                                },
+                                "corpo incorreto": {
+                                    "value": {
+                                        "userName": "Seu João",
+                                        "password": "4815"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "an authentication token will be sent"
+                    },
+                    "404": {
+                        "description": "does not exist account register for this email"
+                    },
+                    "422": {
+                        "description": "you sent the data incorrectly"
+                    }
+                }
+            }
+        },
+        "/places": {
+            "post": {
+                "summary": "Registro de localidade",
+                "description": "Rota onde o usuário pode fazer o upload de uma planilha .csv contento informações das localidades de entregas. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "Arraste um arquivo .csv",
+                        "type": "file"
+                    }
+                ],
+                "tags": [
+                    "Places"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de localidades",
+                "description": "Rota onde o usuário pode visualizar as localidades registradas por página. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "tags": [
+                    "Places"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            }
+        },
+        "/places/{id}": {
+            "delete": {
+                "summary": "Deletar uma localidade",
+                "description": "Rota onde o usuário pode deletar uma localidade já registradas. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id place",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Places"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Place not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            }
+        },
+        "/truckes": {
+            "post": {
+                "summary": "Registrar um novo caminhão",
+                "description": "Rota onde o usuário pode cadastrar um novo caminhão. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "tags": [
+                    "Truckes"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/truckes"
+                            },
+                            "examples": {
+                                "corpo correto": {
+                                    "value": {
+                                        "name": "Trovão azul",
+                                        "licensePlate": "BRA2k23",
+                                        "year": "2015",
+                                        "color": "azul",
+                                        "efficiency": "12"
+                                    }
+                                },
+                                "corpo incorreto": {
+                                    "value": {
+                                        "name": "Trovão azul",
+                                        "licensePlate": "placa incorreta",
+                                        "year": "2015",
+                                        "color": "azul",
+                                        "efficiency": "12"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "409": {
+                        "description": "Truck already register"
+                    },
+                    "422": {
+                        "description": "You sent the data incorrectly"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de caminhões",
+                "description": "Rota onde o usuário pode visualizar os caminhões cadastrados por página. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "tags": [
+                    "Truckes"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualizar um caminhão",
+                "description": "Rota onde o usuário pode atualizar um caminhão. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "tags": [
+                    "Truckes"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/truckes"
+                            },
+                            "examples": {
+                                "corpo correto": {
+                                    "value": {
+                                        "name": "Trovão verde",
+                                        "licensePlate": "BRA2k23",
+                                        "year": "2015",
+                                        "color": "verde",
+                                        "efficiency": "12"
+                                    }
+                                },
+                                "corpo incorreto": {
+                                    "value": {
+                                        "name": "Trovão verde",
+                                        "licensePlate": "placa incorreta",
+                                        "year": "2015",
+                                        "color": "verde",
+                                        "efficiency": "12"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "404": {
+                        "description": "Truck not found"
+                    },
+                    "422": {
+                        "description": "You sent the data incorrectly"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            }
+        },
+        "/truckes/{licensePlate}": {
+            "delete": {
+                "summary": "Deletar um caminhão",
+                "description": "Rota onde o usuário pode deletar um caminhão já registrado. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "parameters": [
+                    {
+                        "name": "licensePlate",
+                        "in": "path",
+                        "description": "License plate",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Truckes"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "404": {
+                        "description": "Truck not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            }
+        },
+        "/revenues": {
+            "post": {
+                "summary": "Registrar um faturamento",
+                "description": "Rota onde o usuário pode registrar os faturamentos de viagens. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/revenues"
+                            },
+                            "examples": {
+                                "corpo correto": {
+                                    "value": {
+                                        "value": 5000
+                                    }
+                                },
+                                "corpo incorreto": {
+                                    "value": {}
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Revenues"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Success"
+                    },
+                    "422": {
+                        "description": "you sent the data incorrectly"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Listagem de faturamento",
+                "description": "Rota onde o usuário pode visualizar as estatísticas de faturamentos dos ultimos 12 meses. Rota autenticada - insira o token enviado pela requisição POST('sign-in') no cadeado superior direito",
+                "tags": [
+                    "Revenues"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "sign-up": {
+                "type": "object",
+                "properties": {
+                    "nickName": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "sign-in": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "truckes": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "licensePlate": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "string"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "efficiency": {
+                        "type": "string"
+                    }
+                }
+            },
+            "revenues": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

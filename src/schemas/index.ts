@@ -17,7 +17,7 @@ const truckSchema = joi.object({
 })
 
 const revenuesSchema = joi.object({
-    profit: joi.string().min(0).required(),
+    value: joi.number().min(0).required(),
 })
 
 export default {
