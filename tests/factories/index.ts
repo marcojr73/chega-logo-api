@@ -80,6 +80,33 @@ async function registerFakeTruckDB() {
     return truck.id
 }
 
+function createFakePlace() {
+    return [
+        {
+            id: faker.datatype.number({ min: 0 }),
+            name: faker.name.firstName(),
+            distance: faker.address.latitude()
+        }
+    ]
+}
+
+function lastMonthYear() {
+    return [{
+        month: faker.date.month(),
+        year: faker.date.month(),
+    }]
+}
+
+function createValidTruck(){
+    return {
+        name: faker.name.firstName(),
+        licensePlate: "BRA2K23",
+        year: "2015",
+        color: faker.color.rgb(),
+        efficiency: faker.datatype.number({ min: 0 }).toString(),
+    }
+}
+
 export {
     createValidAuthData,
     createInvalidAuthData,
@@ -89,5 +116,8 @@ export {
     createPlaceDb,
     createFakeValue,
     createFakeTruck,
-    registerFakeTruckDB
+    registerFakeTruckDB,
+    createFakePlace,
+    lastMonthYear,
+    createValidTruck
 }

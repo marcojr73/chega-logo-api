@@ -13,20 +13,20 @@ beforeEach(async () => {
 })
 
 describe("post places", () => {
-    // ------------------------- FIX THIS ---------------------------------------
-    // it("should register places", async () => {
-    //     const csvFile = path.resolve(__dirname, "../factories/Localidades.csv")
-    //     console.log(csvFile)
-    //     const token = await factory.createValidToken()
-    //     const response = await request(app)
-    //         .post("/places")
-    //         .set("Content-Type", "multipart/form-data")
-    //         .set("Authorization", "Bearer " + token)
-    //         .attach("file", csvFile)
-    //     console.log(response)
-    //     expect(response.statusCode).toBe(201)
-    // })
-   
+    // ========================= FIX THIS ==========================================//
+    // it("should register places", async () => {                                   //
+    //     const csvFile = path.resolve(__dirname, "../factories/Localidades.csv")  //
+    //     console.log(csvFile)                                                     //
+    //     const token = await factory.createValidToken()                           //
+    //     const response = await request(app)                                      //
+    //         .post("/places")                                                     //
+    //         .set("Content-Type", "multipart/form-data")                          //  
+    //         .set("Authorization", "Bearer " + token)                             //
+    //         .attach("file", csvFile)                                             //
+    //     console.log(response)                                                    //
+    //     expect(response.statusCode).toBe(201)                                    //
+    // })                                                                           //
+    //==============================================================================//
 })
 
 describe("get places", () => {

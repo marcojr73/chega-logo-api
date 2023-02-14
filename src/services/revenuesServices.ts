@@ -52,7 +52,8 @@ async function mappingBalanceLastMonth(lastMonthsYears: lastMonthYearEntity) {
     let sumTravels = 0
 
     for (const monthYear of lastMonthsYears) {
-        const sum = await revenuesRepository.getBalanceByMonthYear(+monthYear.month, +monthYear.year)
+        const sum = await revenuesRepository.getBalanceByMonthYear(+monthYear.month, +monthYear.year) as any
+        if(sum.length === 0) return
         balance.push([
             `${hash[+monthYear.month]}/${monthYear.year}`,
             Number(sum[0].sum),

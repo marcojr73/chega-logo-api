@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" width="200" alt="node Logo" /></a>
 </p>
 
 
@@ -9,67 +9,73 @@
   </font>
 </p>
 
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-<!-- 
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p> -->
-
+***
 ## Description
+- Seu João é dono da empresa Chega Logo, uma pequena transportadora. onde fica o galpão dessa empresa, caminhões saem carregando suas entregas para outras localidades, onde deixam o carregamento e retornam. Faz isso com um preço muito competitivo e com excelente pontualidade. O segredo dessa eficiência, segundo Seu João, é o controle que faz das viagens, caminhões e localidades através de uma planilha, cada um em uma respectiva aba. Lá, ele registra tudo o que precisa para calcular o preço das entregas de forma que seja justo mas, também, lucrativo. Contudo, seu João vem enfrentando dificuldades em lidar com a quantidade de dados em sua planilha, que cresce cada vez mais. 
+- Esta API é responsavel por organizar todo o esquema de transportes, através de um login de usuário e senha seu João pode gerenciar tudo de forma dinâmica e segura.
 
+- [veja meu repositório front end desta aplicação aqui](https://github.com/marcojr73/chega-logo-front)
 
+***
+## Technologies and concepts
+- Node.js
+- Typescript
+- Express
+- JWT
+- Jest
+- Prisma
+- Postgres
+- layered architecture
+- Docker
+- Swagger
 
+***
 ## Installation
 
-```bash
-$ npm install
-```
+- Install my project, its dependencies and configure the .env as in the examples
 
+```bash
+  $ git clone git@github.com:marcojr73/chega-logo-api.git
+
+  $ npm install
+
+  $ npx prisma migrate dev
+
+  $ npx prisma db seed
+```
+***
 ## Running the app
 
-```bash
-# development
-$ npm run dev
+- Local
 
-# production mode
-$ npm run start
+```bash
+  npm run dev
+```
+
+- Run with Docker
+
+```bash
+  npm run docker
+```
+
+***
+## Api reference - Swagger
+
+- Launch the application and access the **/docs** route in your browser
+
+***
+## Tests
+
+```bash
+# integration testing
+$ npm run test:integration
+
+# unit testing
+$ npm run test:unit
 ```
 
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-```
-
-## Run with docker
-
-```bash
-# build
-$ npm run docker:build
-
-
-# start
-$ npm run docker:start
-
-```
-
-
-## Documentation
-
+***
 ## Contact
 
 - Author - [Marco Júnior](https://github.com/marcojr73)
